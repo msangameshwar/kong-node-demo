@@ -1,0 +1,22 @@
+_format_version: "1.1"
+services:
+  - name: gist-service
+    url: https://api.github.com
+    routes:
+      - name: gists-route
+        paths:
+          - /gists
+  - name: hello-service
+    url: http://host.docker.internal:3001
+    #url: http://localhost:3001
+    routes:
+      - name: hello-route
+        paths:
+          - /hello
+plugins:
+ - name: rate-limiting
+  #  route: mock
+   config:
+     minute: 2
+     hour: 10000
+     policy: local
